@@ -1,8 +1,10 @@
 clc; clear; close all;
 format short
 %load DeepMIMO_FURI_Demo.mat % For DeepMIMO Comparison
-for y = [1:2]
-    for x = [1:5]
+for y = [1:5]
+    for x = [1:10]
+        disp(x)
+        disp(y)
 BW = 100e6; % spacing for DeepMIMO unit in Hz
 
 %% Signal Parameters
@@ -20,9 +22,9 @@ light_constant = 3e8; % speed of light constant
 % num_row = 50;
 % num_col = 10;
 % num_users = num_col * num_row;
-x_coord_list = [1:5];
-x_coord_list_2 = [1:5];
-y_coord_list = [1:2];
+x_coord_list = [1:10];
+x_coord_list_2 = [1:10];
+y_coord_list = [1:5];
 
 %0.5m
 %x_coord_list = [0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10];
@@ -34,12 +36,12 @@ y_coord_list = [1:2];
 %x_coord_list_2 = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2];
 %y_coord_list = [0.1,0.2,0.3,0.4,0.5];
 
-x_coord_list = [x_coord_list,x_coord_list_2];
+x_coord_list = [x_coord_list,x_coord_list_2,x_coord_list,x_coord_list_2,x_coord_list_2];
 
-y_coord_list = repelem(y_coord_list,5);
+y_coord_list = repelem(y_coord_list,10);
 
 z_coord_list = 1;
-z_coord_list = repelem(z_coord_list,10);
+z_coord_list = repelem(z_coord_list,50);
 
 disp(x_coord_list)
 disp(y_coord_list)
@@ -52,7 +54,7 @@ bottom_left = [10; 5/2; 1]; % top right
 bottom_right = [10; 5/2; 1]; %bottom right
 num_row = 3;
 num_col = 1;
-num_users = 11; %think it's the number of rx users + 1
+num_users = 51; %think it's the number of rx users + 1
 
 %% Script Execution Parameters
 load_environment = true; % do you want to load the stl environment
@@ -114,7 +116,7 @@ end
 pm = propagationModel("raytracing", ... % Defining model as a ray tracing model
     "CoordinateSystem","cartesian", .... % Defining coordinate system as cartesian
     "Method","sbr",... % Defining method as sbr
-    "MaxNumReflections",0, ... % Only record paths with certain number of reflections (0 indexed)
+    "MaxNumReflections",1, ... % Only record paths with certain number of reflections (0 indexed)
     "MaxNumDiffractions",1, ... % Only record paths with certain number of diffractions (0 indexed)
     "SurfaceMaterial","concrete"); % Define material of STL
 
